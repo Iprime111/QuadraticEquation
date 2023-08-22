@@ -12,16 +12,16 @@ enum input_status clear_buffer();
 /*!
     Reads coefficient values from console
     \param a,b,c Pointers to read values
-    \return Status of input operation
+    \return Status of an input operation
 */
 enum input_status get_input(double *a, double *b, double *c);
 
 /*!
     Shows console user interface and scans all equation coefficients
     \param a,b,c Pointers to read values
-    \return Nothing
+    \return Status of an input operation
 */
-void show_interface(double *a, double *b, double *c);
+enum input_status request_input(double *a, double *b, double *c);
 
 /*!
     Prints solution result in console

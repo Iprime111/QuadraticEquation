@@ -1,6 +1,7 @@
 #include "Solver.h"
 #include <cassert>
 #include <math.h>
+#include <cstdio>
 
 //TODO test
 /*test(...) {
@@ -10,19 +11,27 @@
 }*/
 
 struct solution_result *solve_equation(const double a, const double b, const double c){
-    assert(!check_NaN_coefficients(a, b, c));
-    assert(!check_inf_coefficients(a, b, c));
+    solver_assert(!check_NaN_coefficients(a, b, c), number_is_nan, NULL);
+    solver_assert(!check_inf_coefficients(a, b, c), number_is_inf, NULL);
 
-    if(!compare_doubles(a, 0)) return solve_linear(a, b);
+    if(!compare_doubles(a, 0)) return solve_linear(b, c);
 
     return solve_quadratic(a, b, c);
 }
 
 struct solution_result *solve_linear(const double b, const double c){
+    solver_assert(!check_NaN_coefficients(0.0, b, c), number_is_nan, NULL);
+    solver_assert(!check_inf_coefficients(0.0, b, c), number_is_inf, NULL);
 
     struct solution_result *res = NULL;
 
-    assert((void("Entered coefficient values are not forming the equation!"), compare_doubles(b, 0))); // TODO b == 0 case
+    if(compare_doubles(c, 0)){
+        solver_assert(compare_doubles(b, 0), not_an_equation, NULL);
+    }else if(!compare_doubles(b, 0)){
+        res = (struct solution_result *)calloc(1, SOL_SIZE(0));
+        res->status = inf_roots;
+        return res;
+    }
 
     res = (struct solution_result *)calloc(1, SOL_SIZE(1));
     res->status = one_root;
@@ -32,7 +41,8 @@ struct solution_result *solve_linear(const double b, const double c){
 }
 
 struct solution_result *solve_quadratic(const double a, const double b, const double c){
-// TODO asserts on inf, nan
+    solver_assert(!check_NaN_coefficients(a, b, c), number_is_nan, NULL);
+    solver_assert(!check_inf_coefficients(a, b, c), number_is_inf, NULL);
 
     struct solution_result *res = NULL;
     double d = b * b - 4 * a * c;

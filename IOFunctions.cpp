@@ -4,14 +4,14 @@
 #include <cstdlib>
 
 
-void show_interface(double *a, double *b, double *c){
+enum input_status request_input(double *a, double *b, double *c){
+    solver_assert(a != NULL, pointer_is_null, exit_status);
+    solver_assert(b != NULL, pointer_is_null, exit_status);
+    solver_assert(c != NULL, pointer_is_null, exit_status);
+    solver_assert(a != b, not_enough_pointers, exit_status);
+    solver_assert(b != c, not_enough_pointers, exit_status);
+    solver_assert(a != c, not_enough_pointers, exit_status);
 
-    assert(a != NULL);
-    assert(b != NULL);
-    assert(c != NULL);
-
-    //TODO my_assert(..., err_code)
-    //TODO more asserts
 
     printf("Enter a, b and c coefficients (a * x^2 + b * x^2 + c = 0) or q to exit: ");
 
@@ -20,7 +20,8 @@ void show_interface(double *a, double *b, double *c){
         printf("Wrong format! Please enter a, b and c coefficients or q to exit: ");
     }
 
-    if(status == exit_status) exit(0);
+    solver_assert(status != exit_status, exit_status_found, exit_status);
+    return ok_status;
 }
 
 enum input_status get_input(double *a, double *b, double *c){
@@ -39,7 +40,9 @@ enum input_status clear_buffer(){
         ch_count++;
         if(ch != 'q') only_q = false;
         ch = getchar();
-        if(ch == EOF) return exit_status;
+        if(ch == EOF){
+            solver_assert(ch != EOF, eof_found, exit_status)
+        }
     }
     if(ch_count == 1 && only_q) return exit_status;
     return wrong_format;
@@ -47,7 +50,7 @@ enum input_status clear_buffer(){
 
 void show_results(const struct solution_result *result){
 
-    assert(result != NULL);
+    solver_assert(result != NULL, pointer_is_null, (void)" ");
 
     switch(result->status){
         case no_roots:
@@ -58,6 +61,9 @@ void show_results(const struct solution_result *result){
             break;
         case two_roots:
             printf("Two roots: %.4lf %.4lf\n", result->answers[0], result->answers[1]);
+            break;
+        case inf_roots:
+            printf("Equation has infinitely many roots\n");
             break;
         default:
             printf("Unexpected error occuried!");

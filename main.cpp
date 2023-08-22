@@ -10,7 +10,8 @@ int main(void){
 
     double a = NAN, b = NAN, c = NAN;
 
-    show_interface(&a, &b, &c);
+    enum input_status input_res = request_input(&a, &b, &c);
+    solver_assert(input_res != exit_status, exit_status_found, 0);
 
     struct solution_result *result = solve_equation(a, b, c);
 
