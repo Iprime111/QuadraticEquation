@@ -1,1 +1,6 @@
 a.out
+compile
+doxConfig
+IOFunctions.h.gch
+Solver.h.gch
+SolverUtils.h.gch
