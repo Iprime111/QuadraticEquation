@@ -24,6 +24,15 @@ void assert_manager(enum error_code code, char *expr){
         case exit_status_found:
             printf("Exit status found!");
             break;
+        case cannot_open_file:
+            printf("Can not open file for reading!");
+            break;
+        case wrong_data_format:
+            printf("Incorrect file data format!");
+            break;
+        case too_many_arguments:
+            printf("Too many command line arguments!");
+            break;
         default:
             printf("Unknown error!");
     }

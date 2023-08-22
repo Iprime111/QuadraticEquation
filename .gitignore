@@ -1,6 +1,10 @@
 a.out
 compile
-doxConfig
+Doxyfile
 IOFunctions.h.gch
 Solver.h.gch
 SolverUtils.h.gch
+Tester.h.gch
+html
+.vscode
+latex

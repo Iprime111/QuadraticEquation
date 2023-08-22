@@ -3,13 +3,17 @@
 
 const double EPS =  1.0e-6;
 #define SOL_SIZE(X) (sizeof(struct solution_result) + X * sizeof(double))
-#define solver_assert(EXP,CODE,RET) if(!(EXP)){assert_manager(CODE, #EXP); return RET;}
+#define solver_assert(EXP, CODE, RET)\
+            if(!(EXP)){\
+                assert_manager(CODE, #EXP); return RET;\
+            }
 
 enum solution_status {
     no_roots    = 0,
     one_root    = 1,
     two_roots   = 2,
-    inf_roots   = 3
+    inf_roots   = 3,
+    no_result   = 4
 };
 enum input_status {
     ok_status       = 0,
@@ -24,12 +28,15 @@ enum error_code{
     not_enough_pointers = 3,
     eof_found           = 4,
     pointer_is_null     = 5,
-    exit_status_found   = 6
+    exit_status_found   = 6,
+    cannot_open_file    = 7,
+    wrong_data_format   = 8,
+    too_many_arguments  = 9
 };
 
 struct solution_result{
     enum solution_status status;
-    double answers[];
+    double answers[2];
 };
 
 /*!

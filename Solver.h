@@ -3,6 +3,11 @@
 
 #include "SolverUtils.h"
 
+enum compare_result{
+    GREATER     = 1,
+    LESS        = -1,
+    EQUAL       = 0
+};
 
 /*!
     Compares two doubles a and b
@@ -17,26 +22,29 @@ int compare_doubles(const double a, const double b);
     \param a,b,c Equation coefficients
     \return Struct that contains equation roots and solution result status
 */
-struct solution_result *solve_equation(const double a, const double b, const double c);
+int solve_equation(const double a, const double b, const double c, struct solution_result *res);
 
 /*!
     Solves linear equation with given coefficients b and c
     \param b,c Equation coefficients
-    \return Struct that contains equation roots and solution result status
+    \param res Output result structure
+    \return 0 if succesful, -1 if not
 */
-struct solution_result *solve_linear(const double b, const double c);
+int solve_linear(const double b, const double c, struct solution_result *res);
 
 /*!
     Solves quadratic equation with given coefficients a, b and c
     \param a,b,c Equation coefficients
-    \return Struct that contains equation roots and solution result status
+    \param res Output result structure
+    \return 0 if succesful, -1 if not
 */
-struct solution_result *solve_quadratic(const double a, const double b, const double c);
+int solve_quadratic(const double a, const double b, const double c, struct solution_result *res);
 
 /*!
     Checks if some of equation coefficients have NaN value
     \param a,b,c Equation coefficients
-    \return Check result
+    \param res Output result structure
+    \return 0 if succesful, -1 if not
 */
 int check_NaN_coefficients(const double a, const double b, const double c);
 

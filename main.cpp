@@ -4,20 +4,27 @@
 #include "Solver.h"
 #include "IOFunctions.h"
 #include "SolverUtils.h"
+#include "Tester.h"
 
-int main(void){
+int main(int argc, char *argv[]){
 
+    solver_assert(argc < 3, too_many_arguments, 0);
+
+    if(argc > 1){
+        Test(argv[1]);
+        return 0;
+    }
 
     double a = NAN, b = NAN, c = NAN;
 
     enum input_status input_res = request_input(&a, &b, &c);
     solver_assert(input_res != exit_status, exit_status_found, 0);
 
-    struct solution_result *result = solve_equation(a, b, c);
+    struct solution_result result = {no_result, {NAN, NAN}};
+    solve_equation(a, b, c, &result);
 
-    if(result != NULL){
-        show_results(result);
-        free(result);
+    if(result.status != no_result){
+        show_results(&result);
     }
     return 0;
 }

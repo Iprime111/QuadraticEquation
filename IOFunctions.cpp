@@ -65,6 +65,9 @@ void show_results(const struct solution_result *result){
         case inf_roots:
             printf("Equation has infinitely many roots\n");
             break;
+        case no_result:
+            solver_assert(0, not_an_equation, (void)" ");
+            break;
         default:
             printf("Unexpected error occuried!");
             break;
