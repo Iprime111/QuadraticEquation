@@ -10,11 +10,10 @@ struct LOGGED_FUNCTION *Stack_trace_buffer;
 static int FunctionsCount = 0;
 
 void add_func_to_log (const char *file, const char *function, int line){
-
-    solver_assert (file != NULL, pointer_is_null, (void)" ");
-    solver_assert (function != NULL, pointer_is_null, (void)" ");
-    solver_assert (strlen (file) < FILENAME_MAX, length_too_big, (void)" ");
-    solver_assert (strlen (file) < FILENAME_MAX, length_too_big, (void)" ");
+    solver_assert (file != NULL,                    pointer_is_null, (void)" ");
+    solver_assert (function != NULL,                pointer_is_null, (void)" ");
+    solver_assert (strlen (file) < FILENAME_MAX,    length_too_big, (void)" ");
+    solver_assert (strlen (file) < FILENAME_MAX,    length_too_big, (void)" ");
 
     if (FunctionsCount >= TRACE_BUFFER_SIZE)
         return;

@@ -8,12 +8,12 @@
 enum INPUT_STATUS request_input (double *a, double *b, double *c){
     PushLog;
 
-    solver_assert (a != NULL, pointer_is_null, exit_status);
-    solver_assert (b != NULL, pointer_is_null, exit_status);
-    solver_assert (c != NULL, pointer_is_null, exit_status);
-    solver_assert (a != b, not_enough_pointers, exit_status);
-    solver_assert (b != c, not_enough_pointers, exit_status);
-    solver_assert (a != c, not_enough_pointers, exit_status);
+    solver_assert (a != NULL,   pointer_is_null, exit_status);
+    solver_assert (b != NULL,   pointer_is_null, exit_status);
+    solver_assert (c != NULL,   pointer_is_null, exit_status);
+    solver_assert (a != b,      not_enough_pointers, exit_status);
+    solver_assert (b != c,      not_enough_pointers, exit_status);
+    solver_assert (a != c,      not_enough_pointers, exit_status);
 
     printf ("Enter a, b and c coefficients (a * x^2 + b * x^2 + c = 0) or q to exit: ");
 

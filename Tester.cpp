@@ -14,7 +14,7 @@ int Test (char *filename){
     solver_assert (ferror (fp) == 0, cannot_open_file, -1);
 
     struct SOLUTION_RESULT r_answer = {no_result, {NAN, NAN}};
-    struct SOLUTION_RESULT answer = {no_result, {NAN, NAN}};
+    struct SOLUTION_RESULT answer   = {no_result, {NAN, NAN}};
 
     int ans = 0, r_ans = 0;
     enum INPUT_STATUS status = ok_status;
@@ -50,7 +50,7 @@ int Test (char *filename){
 }
 
 bool Test_one_chunk (struct SOLUTION_RESULT *r_answer, struct SOLUTION_RESULT *answer, double a, double b, double c){
-    PushLog; // TODO Push(To)Log
+    PushLog;
 
     solver_assert (!check_NaN_coefficients (a, b, c), number_is_nan, 0);
     solver_assert (!check_inf_coefficients (a, b, c), number_is_inf, 0);
@@ -71,7 +71,6 @@ bool Test_one_chunk (struct SOLUTION_RESULT *r_answer, struct SOLUTION_RESULT *a
 enum INPUT_STATUS clear_file_buf (FILE *fp){
     PushLog;
     int ch = fgetc (fp);
-     // TODO WRITE README!!!!
 
     while (ch != '\n'){
         ch = fgetc (fp);
