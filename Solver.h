@@ -3,57 +3,54 @@
 
 #include "SolverUtils.h"
 
-enum compare_result{
-    GREATER     = 1,
-    LESS        = -1,
-    EQUAL       = 0
-};
-
 /*!
-    Compares two doubles a and b
-    \param a First double
-    \param b Second double
-    \return 1 if a is bigger than b, -1 if b is bigger than a and 0 if they are equal
+    @brief Compares two doubles a and b
+    @param[in] a First double
+    @param[in] b Second double
+    @return GREATER if a is bigger than b, LESS if b is bigger than a and EQUAL if they are equal
+    Function that compares two doubles and returns COMPARE_RESULT enum
 */
-int compare_doubles(const double a, const double b);
+enum COMPARE_RESULT compare_doubles (const double a, const double b);
 
 /*!
+    @brief Solves given equation
+    @param[in] a,b,c Equation coefficients
+    @return Struct that contains equation roots and solution result status
     Solves a*x^2 + b*x + c = 0 equation with given coefficients
-    \param a,b,c Equation coefficients
-    \return Struct that contains equation roots and solution result status
 */
-int solve_equation(const double a, const double b, const double c, struct solution_result *res);
+int solve_equation (const double a, const double b, const double c, struct SOLUTION_RESULT *res);
 
 /*!
+    @brief Solves given linear equation
+    @param[in] b,c Equation coefficients
+    \param[out] res Output result structure
+    \return 0 if succesful, -1 if not
     Solves linear equation with given coefficients b and c
-    \param b,c Equation coefficients
-    \param res Output result structure
-    \return 0 if succesful, -1 if not
 */
-int solve_linear(const double b, const double c, struct solution_result *res);
+int solve_linear (const double b, const double c, struct SOLUTION_RESULT *res);
 
 /*!
-    Solves quadratic equation with given coefficients a, b and c
-    \param a,b,c Equation coefficients
-    \param res Output result structure
-    \return 0 if succesful, -1 if not
+    @brief Solves given quadratic equation
+    @param[in] a,b,c Equation coefficients
+    @param[out] res Output result structure
+    @return 0 if succesful, -1 if not
+    Solves quadratic equation with given coefficients a, b and c (a != 0)
 */
-int solve_quadratic(const double a, const double b, const double c, struct solution_result *res);
+int solve_quadratic (const double a, const double b, const double c, struct SOLUTION_RESULT *res);
 
 /*!
-    Checks if some of equation coefficients have NaN value
-    \param a,b,c Equation coefficients
-    \param res Output result structure
-    \return 0 if succesful, -1 if not
+    @brief Checks if some of equation coefficients have NaN value
+    @param[in] a,b,c Equation coefficients
+    @return 1 if at least one of coefficients has NaN value and 0 if not
 */
-int check_NaN_coefficients(const double a, const double b, const double c);
+int check_NaN_coefficients (const double a, const double b, const double c);
 
 /*!
-    Checks if some of equation coefficients have inf value
-    \param a,b,c Equation coefficients
-    \return Check result
+    @brief Checks if some of equation coefficients have inf value
+    @param[in] a,b,c Equation coefficients
+    @return 1 if at least one of coefficients has inf value and 0 if not
 */
-int check_inf_coefficients(const double a, const double b, const double c);
+int check_inf_coefficients (const double a, const double b, const double c);
 
 #endif
 
