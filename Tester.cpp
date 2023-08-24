@@ -7,7 +7,7 @@
 #include "Logger.h"
 
 int Test (char *filename){
-    AddLog;
+    PushLog;
 
     FILE *fp = NULL;
     solver_assert ((fp = fopen (filename, "r")) != NULL, cannot_open_file, -1);
@@ -50,7 +50,7 @@ int Test (char *filename){
 }
 
 bool Test_one_chunk (struct SOLUTION_RESULT *r_answer, struct SOLUTION_RESULT *answer, double a, double b, double c){
-    AddLog;
+    PushLog; // TODO Push(To)Log
 
     solver_assert (!check_NaN_coefficients (a, b, c), number_is_nan, 0);
     solver_assert (!check_inf_coefficients (a, b, c), number_is_inf, 0);
@@ -63,12 +63,13 @@ bool Test_one_chunk (struct SOLUTION_RESULT *r_answer, struct SOLUTION_RESULT *a
         PopLog;
         return true;
     }
+
     PopLog;
     return false;
 }
 
 enum INPUT_STATUS clear_file_buf (FILE *fp){
-    AddLog;
+    PushLog;
     int ch = fgetc (fp);
      // TODO WRITE README!!!!
 
@@ -84,7 +85,7 @@ enum INPUT_STATUS clear_file_buf (FILE *fp){
 }
 
 enum INPUT_STATUS read_data_chunk (FILE *fp, struct SOLUTION_RESULT *answer, double *a, double *b, double *c){
-    AddLog;
+    PushLog;
     solver_assert (answer != NULL, pointer_is_null, exit_status);
     solver_assert (fp != NULL, pointer_is_null, exit_status);
     solver_assert (a != NULL, pointer_is_null, exit_status);
@@ -113,7 +114,7 @@ enum INPUT_STATUS read_data_chunk (FILE *fp, struct SOLUTION_RESULT *answer, dou
 }
 
 int show_error (int test_number, const struct SOLUTION_RESULT *right_answer, const struct SOLUTION_RESULT *answer, double a, double b, double c){
-    AddLog;
+    PushLog;
 
     solver_assert (answer != NULL,                    pointer_is_null, -1);
     solver_assert (right_answer != NULL,              pointer_is_null, -1);
@@ -135,13 +136,13 @@ int show_error (int test_number, const struct SOLUTION_RESULT *right_answer, con
 }
 
 void show_success (int test_number){
-    AddLog;
+    PushLog;
     printf_color (Console_green, Console_bold, "Test #%d passed \n", test_number);
     PopLog;
 }
 
 void print_roots (const struct SOLUTION_RESULT *answer){
-    AddLog;
+    PushLog;
 
     printf ("%d", answer->status);
 
@@ -167,13 +168,13 @@ void print_roots (const struct SOLUTION_RESULT *answer){
 }
 
 void show_test_results (int right_answers, int answers){
-    AddLog;
+    PushLog;
     printf ("%d tests passed out of %d!!!\n", right_answers, answers);
     PopLog;
 }
 
 bool are_results_equal (struct SOLUTION_RESULT *res1, struct SOLUTION_RESULT *res2){
-    AddLog;
+    PushLog;
     if (res1->status == res2->status){
         if (res1->status == no_roots || res1->status == inf_roots){
             PopLog;

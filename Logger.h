@@ -54,7 +54,7 @@ extern struct LOGGED_FUNCTION *Stack_trace_buffer;
 #ifdef _SHOW_STACK_TRACE
 
 /*! @brief Adds function to log */
-#define AddLog                                                              \
+#define PushLog                                                              \
             do{                                                             \
                 add_func_to_log (__FILE__, __PRETTY_FUNCTION__, __LINE__);  \
             }while (0)
@@ -67,7 +67,7 @@ extern struct LOGGED_FUNCTION *Stack_trace_buffer;
 
 #else
 
-#define Log ;
+#define PushLog ;
 #define PopLog ;
 
 #endif

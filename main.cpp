@@ -13,7 +13,7 @@
 int main (int argc, char *argv[]){
     open_log();
 
-    AddLog;
+    PushLog;
     solver_assert (argc < 3, too_many_arguments, 0);
 
     if (argc > 1){

@@ -7,6 +7,7 @@
 
 
 int solve_equation (const double a, const double b, const double c, struct SOLUTION_RESULT *res){
+    PushLog;
     solver_assert (!check_NaN_coefficients (a, b, c), number_is_nan, -1);
     solver_assert (!check_inf_coefficients (a, b, c), number_is_inf, -1);
 
@@ -20,6 +21,7 @@ int solve_equation (const double a, const double b, const double c, struct SOLUT
 }
 
 int solve_linear (const double b, const double c, struct SOLUTION_RESULT *res){
+    PushLog;
     solver_assert (!check_NaN_coefficients (0.0, b, c), number_is_nan, -1);
     solver_assert (!check_inf_coefficients (0.0, b, c), number_is_inf, -1);
 
@@ -46,6 +48,7 @@ int solve_linear (const double b, const double c, struct SOLUTION_RESULT *res){
 }
 
 int solve_quadratic (const double a, const double b, const double c, struct SOLUTION_RESULT *res){
+    PushLog;
     solver_assert (!check_NaN_coefficients (a, b, c), number_is_nan, -1);
     solver_assert (!check_inf_coefficients (a, b, c), number_is_inf, -1);
 
@@ -76,12 +79,15 @@ int check_inf_coefficients (const double a, const double b, const double c){
 }
 
 enum COMPARE_RESULT compare_doubles (const double a, const double b){
-    AddLog;;
+    PushLog;
     if (a - b > EPS){
+        PopLog;
         return GREATER;
     }else if (b - a > EPS){
+        PopLog;
         return LESS;
     }else{
+        PopLog;
         return EQUAL;
     }
     PopLog;

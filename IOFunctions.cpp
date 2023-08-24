@@ -6,7 +6,7 @@
 #include "Logger.h"
 
 enum INPUT_STATUS request_input (double *a, double *b, double *c){
-    AddLog;
+    PushLog;
 
     solver_assert (a != NULL, pointer_is_null, exit_status);
     solver_assert (b != NULL, pointer_is_null, exit_status);
@@ -29,7 +29,7 @@ enum INPUT_STATUS request_input (double *a, double *b, double *c){
 }
 
 enum INPUT_STATUS get_input (double *a, double *b, double *c){
-    AddLog;
+    PushLog;
 
     if(scanf("%lf %lf %lf", a, b, c) < 3){
         return clear_buffer();
@@ -40,7 +40,7 @@ enum INPUT_STATUS get_input (double *a, double *b, double *c){
 }
 
 enum INPUT_STATUS clear_buffer (){
-    AddLog;
+    PushLog;
 
     int ch = getchar ();
     int ch_count = 0;
@@ -64,7 +64,7 @@ enum INPUT_STATUS clear_buffer (){
 }
 
 void show_results (const struct SOLUTION_RESULT *result){
-    AddLog;
+    PushLog;
 
     solver_assert (result != NULL, pointer_is_null, (void)" ");
 

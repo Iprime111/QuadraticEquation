@@ -21,7 +21,8 @@ SquareSolver: $(addprefix $(buildDir)/, $(objects))
 	@$(CXX) $(CXXFLAGS) $^ -o $(addprefix $(buildDir)/, $@)
 
 clean:
-	rm -f *.o all
+	rm -f build/*.o all
+	rm build/SquareSolver
 
 prepare:
 	@mkdir -p $(buildDir)

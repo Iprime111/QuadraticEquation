@@ -5,7 +5,7 @@
 #include "Logger.h"
 
 void printf_color (enum CONSOLE_COLOR color, enum CONSOLE_BOLD bold, const char *format, ...){
-    AddLog;
+    PushLog;
 
     va_list args;
     va_start (args, bold);
@@ -20,7 +20,7 @@ void printf_color (enum CONSOLE_COLOR color, enum CONSOLE_BOLD bold, const char 
 }
 
 void set_color (enum CONSOLE_COLOR color, enum CONSOLE_BOLD bold){
-    AddLog;
+    PushLog;
     printf ("\033[%d;3%dm", bold, color);
     PopLog;
 }
