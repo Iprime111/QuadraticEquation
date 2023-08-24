@@ -8,8 +8,6 @@
 #include "SolverUtils.h"
 #include "Tester.h"
 
-#include <assert.h>
-
 int main (int argc, char *argv[]){
     open_log();
 
