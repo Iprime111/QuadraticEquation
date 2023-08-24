@@ -12,10 +12,10 @@ int solve_equation (const double a, const double b, const double c, struct SOLUT
     solver_assert (!check_inf_coefficients (a, b, c), number_is_inf, -1);
 
     if (!compare_doubles (a, 0)){
-        RETURN(solve_linear (b, c, res));
+        RETURN solve_linear (b, c, res);
     }
 
-    RETURN(solve_quadratic (a, b, c, res));
+    RETURN solve_quadratic (a, b, c, res);
 }
 
 int solve_linear (const double b, const double c, struct SOLUTION_RESULT *res){
@@ -27,19 +27,19 @@ int solve_linear (const double b, const double c, struct SOLUTION_RESULT *res){
         if (!compare_doubles (b, 0)){
             res->status = no_roots;
 
-            RETURN(0);
+            RETURN 0;
         }
 
     }else if (!compare_doubles (b, 0)){
         res->status = inf_roots;
 
-        RETURN(0);
+        RETURN 0;
     }
 
     res->status = one_root;
     res->answers[0] = -c / b;
 
-    RETURN(0);
+    RETURN 0;
 }
 
 int solve_quadratic (const double a, const double b, const double c, struct SOLUTION_RESULT *res){
@@ -61,26 +61,26 @@ int solve_quadratic (const double a, const double b, const double c, struct SOLU
         res->answers[0] = -b / (2 * a);
     }
 
-    RETURN(0);
+    RETURN 0;
 }
 
 int check_NaN_coefficients (const double a, const double b, const double c){
     PushLog(4);
-    RETURN((isnan (a) || isnan (b) || isnan (c) ? 1 : 0));
+    RETURN (isnan (a) || isnan (b) || isnan (c) ? 1 : 0);
 }
 
 int check_inf_coefficients (const double a, const double b, const double c){
     PushLog(4);
-    RETURN((isinf (a) || isinf (b) || isinf (c) ? 1 : 0));
+    RETURN (isinf (a) || isinf (b) || isinf (c) ? 1 : 0);
 }
 
 enum COMPARE_RESULT compare_doubles (const double a, const double b){
     PushLog(4);
     if (a - b > EPS){
-        RETURN(GREATER);
+        RETURN GREATER;
     }else if (b - a > EPS){
-        RETURN(LESS);
+        RETURN LESS;
     }else{
-        RETURN(EQUAL);
+        RETURN EQUAL;
     }
 }

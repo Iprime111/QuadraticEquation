@@ -24,16 +24,16 @@ enum INPUT_STATUS request_input (double *a, double *b, double *c){
 
     solver_assert (status != exit_status, exit_status_found, exit_status);
 
-    RETURN(ok_status);
+    RETURN ok_status;
 }
 
 enum INPUT_STATUS get_input (double *a, double *b, double *c){
     PushLog(2);
 
     if(scanf("%lf %lf %lf", a, b, c) < 3){
-        RETURN(clear_buffer());
+        RETURN clear_buffer();
     }
-    RETURN(ok_status);
+    RETURN ok_status;
 
     PopLog();
 }
@@ -56,14 +56,17 @@ enum INPUT_STATUS clear_buffer (){
         }
     }
 
-    if (ch_count == 1 && only_q) RETURN(exit_status);
-    else                         RETURN(wrong_format);
+    if (ch_count == 1 && only_q){
+        RETURN exit_status;
+    }else{
+        RETURN wrong_format;
+    }
 }
 
 void show_results (const struct SOLUTION_RESULT *result){
     PushLog(1);
 
-    solver_assert (result != NULL, pointer_is_null, (void)" ");
+    solver_assert (result != NULL, pointer_is_null, (void)0);
 
     switch (result->status){
         case no_roots:
@@ -83,7 +86,7 @@ void show_results (const struct SOLUTION_RESULT *result){
             break;
 
         case no_result:
-            solver_assert (0, not_an_equation, (void)" ");
+            solver_assert (0, not_an_equation, (void)0);
             break;
 
         default:

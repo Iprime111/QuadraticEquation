@@ -75,11 +75,7 @@ extern struct LOGGED_FUNCTION *Stack_trace_buffer;
             }while (0)
 
 /*! @brief Returns RET value and calls PopLog */
-#define RETURN(RET)         \
-            do{             \
-                PopLog();   \
-                return RET; \
-            }while (0)
+#define RETURN PopLog(); return
 
 #else
 

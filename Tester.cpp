@@ -44,7 +44,7 @@ int Test (char *filename){
 
     solver_assert (fclose (fp) != EOF, file_close_error, -1);
 
-    RETURN(0);
+    RETURN 0;
 }
 
 bool Test_one_chunk (struct SOLUTION_RESULT *r_answer, struct SOLUTION_RESULT *answer, double a, double b, double c){
@@ -58,10 +58,10 @@ bool Test_one_chunk (struct SOLUTION_RESULT *r_answer, struct SOLUTION_RESULT *a
     solve_equation (a, b, c, answer);
 
     if (are_results_equal (r_answer, answer)){
-        RETURN(true);
+        RETURN true;
     }
 
-    RETURN(false);
+    RETURN false;
 }
 
 enum INPUT_STATUS clear_file_buf (FILE *fp){
@@ -75,7 +75,7 @@ enum INPUT_STATUS clear_file_buf (FILE *fp){
         }
     }
 
-    RETURN(wrong_format);
+    RETURN wrong_format;
 }
 
 enum INPUT_STATUS read_data_chunk (FILE *fp, struct SOLUTION_RESULT *answer, double *a, double *b, double *c){
@@ -94,7 +94,7 @@ enum INPUT_STATUS read_data_chunk (FILE *fp, struct SOLUTION_RESULT *answer, dou
 
         solver_assert (clear_file_buf (fp) != wrong_format, wrong_data_format, wrong_format);
 
-        RETURN(exit_status);
+        RETURN exit_status;
     }
 
     int int_status = 0;
@@ -102,7 +102,7 @@ enum INPUT_STATUS read_data_chunk (FILE *fp, struct SOLUTION_RESULT *answer, dou
     solver_assert (fscanf (fp, "STATUS %d ROOTS %lf %lf ", &int_status, answer->answers, answer->answers + 1) == 3, wrong_data_format, clear_file_buf (fp));
     answer->status =  (enum SOLUTION_STATUS)int_status;
 
-    RETURN(ok_status);
+    RETURN ok_status;
 }
 
 int show_error (int test_number, const struct SOLUTION_RESULT *right_answer, const struct SOLUTION_RESULT *answer, double a, double b, double c){
@@ -123,7 +123,7 @@ int show_error (int test_number, const struct SOLUTION_RESULT *right_answer, con
 
     set_color (Console_white, Console_normal);
 
-    RETURN(0);
+    RETURN 0;
 }
 
 void show_success (int test_number){
@@ -168,15 +168,15 @@ bool are_results_equal (struct SOLUTION_RESULT *res1, struct SOLUTION_RESULT *re
     PushLog(4);
     if (res1->status == res2->status){
         if (res1->status == no_roots || res1->status == inf_roots){
-            RETURN(true);
+            RETURN true;
         }else if (res1->status == one_root && !compare_doubles (res1->answers[0], res2->answers[0])){
-            RETURN(true);
+            RETURN true;
         }else if (res1->status == two_roots &&
                 !compare_doubles (res1->answers[1], res2->answers[1]) &&
                 !compare_doubles (res1->answers[0], res2->answers[0])){
-            RETURN(true);
+            RETURN true;
         }
     }
 
-    RETURN(false);
+    RETURN false;
 }

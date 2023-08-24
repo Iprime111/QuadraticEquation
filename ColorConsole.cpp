@@ -16,13 +16,13 @@ void printf_color (enum CONSOLE_COLOR color, enum CONSOLE_BOLD bold, const char 
 
     va_end (args);
 
-    RETURN((void)0);
+    RETURN;
 }
 
 void set_color (enum CONSOLE_COLOR color, enum CONSOLE_BOLD bold){
     PushLog(4);
     printf ("\033[%d;3%dm", bold, color);
-    RETURN((void)0);
+    RETURN;
 }
 
 
