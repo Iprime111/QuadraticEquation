@@ -6,14 +6,16 @@
 #include "SolverUtils.h"
 #include "ColorConsole.h"
 
-struct LOGGED_FUNCTION *Stack_trace_buffer;
+struct LOGGED_FUNCTION *Stack_trace_buffer = NULL;
+int _log_init = open_log();
 static int FunctionsCount = 0;
 
 void add_func_to_log (const char *file, const char *function, int line){
-    solver_assert (file != NULL,                    pointer_is_null, (void)" ");
-    solver_assert (function != NULL,                pointer_is_null, (void)" ");
-    solver_assert (strlen (file) < FILENAME_MAX,    length_too_big, (void)" ");
-    solver_assert (strlen (file) < FILENAME_MAX,    length_too_big, (void)" ");
+    solver_assert_without_logger (file != NULL,                    pointer_is_null, (void)" ");
+    solver_assert_without_logger (function != NULL,                pointer_is_null, (void)" ");
+    solver_assert_without_logger (Stack_trace_buffer != NULL,      pointer_is_null, (void)" ");
+    solver_assert_without_logger (strlen (file) < FILENAME_MAX,    length_too_big, (void)" ");
+    solver_assert_without_logger (strlen (file) < FILENAME_MAX,    length_too_big, (void)" ");
 
     if (FunctionsCount >= TRACE_BUFFER_SIZE)
         return;
@@ -35,8 +37,10 @@ void pop_func_from_log (){
     FunctionsCount--;
 }
 
-void open_log(){
+int open_log(){
     Stack_trace_buffer = (struct LOGGED_FUNCTION*)calloc(TRACE_BUFFER_SIZE, sizeof(LOGGED_FUNCTION));
+    atexit(close_log);
+    return 1;
 }
 
 void close_log(){

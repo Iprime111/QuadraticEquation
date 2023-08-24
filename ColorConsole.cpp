@@ -1,11 +1,11 @@
 #include <stdio.h>
-#include <stdarg.h> 
+#include <stdarg.h>
 
 #include "ColorConsole.h"
 #include "Logger.h"
 
 void printf_color (enum CONSOLE_COLOR color, enum CONSOLE_BOLD bold, const char *format, ...){
-    PushLog;
+    PushLog(4);
 
     va_list args;
     va_start (args, bold);
@@ -16,13 +16,13 @@ void printf_color (enum CONSOLE_COLOR color, enum CONSOLE_BOLD bold, const char 
 
     va_end (args);
 
-    PopLog;
+    RETURN((void)0);
 }
 
 void set_color (enum CONSOLE_COLOR color, enum CONSOLE_BOLD bold){
-    PushLog;
+    PushLog(4);
     printf ("\033[%d;3%dm", bold, color);
-    PopLog;
+    RETURN((void)0);
 }
 
 

@@ -4,11 +4,17 @@
 const double EPS =  1.0e-6;/// EPS value for double comparison
 
 /*! @brief Custom assert implementation that provides information about file, function and line and do not stops the program*/
-#define solver_assert(EXP, CODE, RET)                                                           \
+#define solver_assert_without_logger(EXP, CODE, RET) \
+    solver_assert_internal(EXP, CODE, RET, {})
+
+#define solver_assert(EXP, CODE, RET) \
+    solver_assert_internal(EXP, CODE, RET, PopLog())
+
+#define solver_assert_internal(EXP, CODE, RET, CALLBACK)                                                           \
             do{                                                                                 \
                 if (!(EXP)){                                                                    \
                     assert_perror_solver (CODE, #EXP, __FILE__, __PRETTY_FUNCTION__, __LINE__); \
-                    PopLog;                                                                    \
+                    CALLBACK;                                                                   \
                     return RET;                                                                 \
                 }                                                                               \
             }while(0)                                                                           \

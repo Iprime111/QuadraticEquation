@@ -6,7 +6,7 @@
 #include "Logger.h"
 
 enum INPUT_STATUS request_input (double *a, double *b, double *c){
-    PushLog;
+    PushLog(1);
 
     solver_assert (a != NULL,   pointer_is_null, exit_status);
     solver_assert (b != NULL,   pointer_is_null, exit_status);
@@ -23,24 +23,23 @@ enum INPUT_STATUS request_input (double *a, double *b, double *c){
     }
 
     solver_assert (status != exit_status, exit_status_found, exit_status);
-    return ok_status;
 
-    PopLog;
+    RETURN(ok_status);
 }
 
 enum INPUT_STATUS get_input (double *a, double *b, double *c){
-    PushLog;
+    PushLog(2);
 
     if(scanf("%lf %lf %lf", a, b, c) < 3){
-        return clear_buffer();
+        RETURN(clear_buffer());
     }
-    return ok_status;
+    RETURN(ok_status);
 
-    PopLog;
+    PopLog();
 }
 
 enum INPUT_STATUS clear_buffer (){
-    PushLog;
+    PushLog(3);
 
     int ch = getchar ();
     int ch_count = 0;
@@ -57,14 +56,12 @@ enum INPUT_STATUS clear_buffer (){
         }
     }
 
-    if (ch_count == 1 && only_q) return exit_status;
-    else                         return wrong_format;
-
-    PopLog;
+    if (ch_count == 1 && only_q) RETURN(exit_status);
+    else                         RETURN(wrong_format);
 }
 
 void show_results (const struct SOLUTION_RESULT *result){
-    PushLog;
+    PushLog(1);
 
     solver_assert (result != NULL, pointer_is_null, (void)" ");
 
@@ -94,6 +91,6 @@ void show_results (const struct SOLUTION_RESULT *result){
             break;
     };
 
-    PopLog;
+    PopLog();
 }
 

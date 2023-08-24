@@ -4,11 +4,14 @@
 /// @brief Size of a buffer which contains logged functions
 const int TRACE_BUFFER_SIZE = 20;
 
+/// @brief Max logging level
+const int LOG_LEVEL = 4;
+
 /// @brief Struct for storing data about logged function
 struct LOGGED_FUNCTION{
-    char file[FILENAME_MAX];
-    char function[FILENAME_MAX];
-    int line;
+    char file     [FILENAME_MAX];
+    char function [FILENAME_MAX];
+    int  line;
 };
 
 /*!
@@ -39,7 +42,7 @@ void pop_func_from_log ();
     @return Nothing
     @note Must be called before logging starts
 */
-void open_log();
+int open_log();
 
 /*!
     @brief Deallocates log buffer memory
@@ -54,21 +57,38 @@ extern struct LOGGED_FUNCTION *Stack_trace_buffer;
 #ifdef _SHOW_STACK_TRACE
 
 /*! @brief Adds function to log */
-#define PushLog                                                              \
-            do{                                                             \
-                add_func_to_log (__FILE__, __PRETTY_FUNCTION__, __LINE__);  \
+#define PushLog(LEVEL)                                                          \
+            const int _log_level_cur_func_ = LEVEL;                             \
+            do{                                                                 \
+                if (LEVEL <= LOG_LEVEL){                                        \
+                    add_func_to_log (__FILE__, __PRETTY_FUNCTION__, __LINE__);  \
+                }                                                               \
             }while (0)
 
+
 /*! @brief Pops function from log */
-#define PopLog                          \
-            do{                         \
-                pop_func_from_log ();   \
+#define PopLog()                                                \
+            do{                                                 \
+                if (_log_level_cur_func_ <= LOG_LEVEL){         \
+                    pop_func_from_log ();                       \
+                }                                               \
+            }while (0)
+
+/*! @brief Returns RET value and calls PopLog */
+#define RETURN(RET)         \
+            do{             \
+                PopLog();   \
+                return RET; \
             }while (0)
 
 #else
 
-#define PushLog ;
-#define PopLog ;
+#define PushLog(LEVEL) ;
+#define PopLog() ;
+#define RETURN(RET)         \
+            do{             \
+                return RET; \
+            }while(0)
 
 #endif
 

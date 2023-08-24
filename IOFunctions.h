@@ -36,5 +36,5 @@ void show_results (const struct SOLUTION_RESULT *result);
 
 #endif
 
-
+ 
 

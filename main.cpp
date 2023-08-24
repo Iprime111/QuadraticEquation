@@ -9,16 +9,14 @@
 #include "Tester.h"
 
 int main (int argc, char *argv[]){
-    open_log();
 
-    PushLog;
+    PushLog(1);
     solver_assert (argc < 3, too_many_arguments, 0);
 
     if (argc > 1){
         Test (argv[1]);
 
-        PopLog;
-        return 0;
+        RETURN(0);
     }
 
     double a = NAN, b = NAN, c = NAN;
@@ -33,8 +31,5 @@ int main (int argc, char *argv[]){
         show_results (&result);
     }
 
-    PopLog;
-    atexit(close_log);
-
-    return 0;
+    RETURN(0);
 }

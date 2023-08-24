@@ -36,8 +36,8 @@ void assert_perror_solver (enum ERROR_CODE code, char *expr, const char *file, c
 
 
     #ifdef _DEBUG
-        printf_color (Console_red, Console_normal, "(%s in file: \"%s\", function: \"%s\", line: %d)\n",\
-                     expr, file, function, line);
+        printf_color (Console_red, Console_normal, "(%s in file: %s:%d function: %s)\n",\
+                     expr, file, line, function);
         #ifdef _SHOW_STACK_TRACE
             printf_color (Console_red, Console_bold, "STACK TRACE:\n");
 

@@ -22,8 +22,8 @@ enum CONSOLE_BOLD{
 
 /*!
     @brief Printf's given text with given color, bold and arguments
-    @param[in] color Text color
-    @param[in] bold Text bold
+    @param[in] color  Text color
+    @param[in] bold   Text bold
     @param[in] format Printf format string
 */
 void printf_color (enum CONSOLE_COLOR color, enum CONSOLE_BOLD bold, const char *format, ...);
@@ -31,7 +31,7 @@ void printf_color (enum CONSOLE_COLOR color, enum CONSOLE_BOLD bold, const char 
 /*!
     @brief Changes console color to given
     @param[in] color Text color
-    @param[in] bold Text bold
+    @param[in] bold  Text bold
 */
 void set_color (enum CONSOLE_COLOR color, enum CONSOLE_BOLD bold);
 

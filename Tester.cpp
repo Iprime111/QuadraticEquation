@@ -7,7 +7,7 @@
 #include "Logger.h"
 
 int Test (char *filename){
-    PushLog;
+    PushLog(1);
 
     FILE *fp = NULL;
     solver_assert ((fp = fopen (filename, "r")) != NULL, cannot_open_file, -1);
@@ -44,13 +44,11 @@ int Test (char *filename){
 
     solver_assert (fclose (fp) != EOF, file_close_error, -1);
 
-    PopLog;
-
-    return 0;
+    RETURN(0);
 }
 
 bool Test_one_chunk (struct SOLUTION_RESULT *r_answer, struct SOLUTION_RESULT *answer, double a, double b, double c){
-    PushLog;
+    PushLog(2);
 
     solver_assert (!check_NaN_coefficients (a, b, c), number_is_nan, 0);
     solver_assert (!check_inf_coefficients (a, b, c), number_is_inf, 0);
@@ -60,16 +58,14 @@ bool Test_one_chunk (struct SOLUTION_RESULT *r_answer, struct SOLUTION_RESULT *a
     solve_equation (a, b, c, answer);
 
     if (are_results_equal (r_answer, answer)){
-        PopLog;
-        return true;
+        RETURN(true);
     }
 
-    PopLog;
-    return false;
+    RETURN(false);
 }
 
 enum INPUT_STATUS clear_file_buf (FILE *fp){
-    PushLog;
+    PushLog(3);
     int ch = fgetc (fp);
 
     while (ch != '\n'){
@@ -79,12 +75,11 @@ enum INPUT_STATUS clear_file_buf (FILE *fp){
         }
     }
 
-    PopLog;
-    return wrong_format;
+    RETURN(wrong_format);
 }
 
 enum INPUT_STATUS read_data_chunk (FILE *fp, struct SOLUTION_RESULT *answer, double *a, double *b, double *c){
-    PushLog;
+    PushLog(2);
     solver_assert (answer != NULL, pointer_is_null, exit_status);
     solver_assert (fp != NULL, pointer_is_null, exit_status);
     solver_assert (a != NULL, pointer_is_null, exit_status);
@@ -99,8 +94,7 @@ enum INPUT_STATUS read_data_chunk (FILE *fp, struct SOLUTION_RESULT *answer, dou
 
         solver_assert (clear_file_buf (fp) != wrong_format, wrong_data_format, wrong_format);
 
-        PopLog;
-        return exit_status;
+        RETURN(exit_status);
     }
 
     int int_status = 0;
@@ -108,12 +102,11 @@ enum INPUT_STATUS read_data_chunk (FILE *fp, struct SOLUTION_RESULT *answer, dou
     solver_assert (fscanf (fp, "STATUS %d ROOTS %lf %lf ", &int_status, answer->answers, answer->answers + 1) == 3, wrong_data_format, clear_file_buf (fp));
     answer->status =  (enum SOLUTION_STATUS)int_status;
 
-    PopLog;
-    return ok_status;
+    RETURN(ok_status);
 }
 
 int show_error (int test_number, const struct SOLUTION_RESULT *right_answer, const struct SOLUTION_RESULT *answer, double a, double b, double c){
-    PushLog;
+    PushLog(3);
 
     solver_assert (answer != NULL,                    pointer_is_null, -1);
     solver_assert (right_answer != NULL,              pointer_is_null, -1);
@@ -130,18 +123,17 @@ int show_error (int test_number, const struct SOLUTION_RESULT *right_answer, con
 
     set_color (Console_white, Console_normal);
 
-    PopLog;
-    return 0;
+    RETURN(0);
 }
 
 void show_success (int test_number){
-    PushLog;
+    PushLog(3);
     printf_color (Console_green, Console_bold, "Test #%d passed \n", test_number);
-    PopLog;
+    PopLog();
 }
 
 void print_roots (const struct SOLUTION_RESULT *answer){
-    PushLog;
+    PushLog(3);
 
     printf ("%d", answer->status);
 
@@ -163,31 +155,28 @@ void print_roots (const struct SOLUTION_RESULT *answer){
             break;
     }
 
-    PopLog;
+    PopLog();
 }
 
 void show_test_results (int right_answers, int answers){
-    PushLog;
+    PushLog(3);
     printf ("%d tests passed out of %d!!!\n", right_answers, answers);
-    PopLog;
+    PopLog();
 }
 
 bool are_results_equal (struct SOLUTION_RESULT *res1, struct SOLUTION_RESULT *res2){
-    PushLog;
+    PushLog(4);
     if (res1->status == res2->status){
         if (res1->status == no_roots || res1->status == inf_roots){
-            PopLog;
-            return true;
+            RETURN(true);
         }else if (res1->status == one_root && !compare_doubles (res1->answers[0], res2->answers[0])){
-            PopLog;
-            return true;
+            RETURN(true);
         }else if (res1->status == two_roots &&
                 !compare_doubles (res1->answers[1], res2->answers[1]) &&
                 !compare_doubles (res1->answers[0], res2->answers[0])){
-            PopLog;
-            return true;
+            RETURN(true);
         }
     }
-    PopLog;
-    return false;
+
+    RETURN(false);
 }
