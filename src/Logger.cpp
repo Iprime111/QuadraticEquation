@@ -22,8 +22,9 @@ void add_func_to_log (const char *file, const char *function, int line){
 
 void Show_stack_trace (){
     for (int i = FunctionsCount - 1; i >= 0; i--){
-        printf_color (Console_default, Console_bold, "function: %-100s (in file %s:%d)\n",\
-            Stack_trace_buffer[i].function, Stack_trace_buffer[i].file, Stack_trace_buffer[i].line);
+        printf_color (Console_default, Console_bold, "#%d\tfunction: %-70s (in file %s:%d)\n",\
+            FunctionsCount - 1 - i, Stack_trace_buffer[i].function, Stack_trace_buffer[i].file,\
+            Stack_trace_buffer[i].line);
     }
 }
 

@@ -17,9 +17,9 @@ enum INPUT_STATUS request_input (double *a, double *b, double *c){
         printf ("Wrong format! Please enter a, b and c coefficients or q to exit: ");
     }
 
-    solver_assert (status != exit_status, exit_status_found, exit_status);
+    solver_assert (status != eof_status, eof_found, eof_status);
 
-    RETURN ok_status;
+    RETURN status;
 }
 
 enum INPUT_STATUS get_input (double *a, double *b, double *c){
@@ -46,7 +46,7 @@ enum INPUT_STATUS clear_buffer (){
 
         ch = getchar();
         if(ch == EOF){
-            solver_assert (ch != EOF, eof_found, exit_status);
+            solver_assert (ch != EOF, eof_found, eof_status);
         }
     }
 
@@ -90,4 +90,3 @@ void show_results (const struct SOLUTION_RESULT *result){
 
     RETURN ;
 }
-

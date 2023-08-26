@@ -12,7 +12,7 @@
 const int TRACE_BUFFER_SIZE = 20;
 
 /// @brief Max logging level
-const int LOG_LEVEL = 1;
+const int LOG_LEVEL = 4;
 
 /// @brief Struct for storing data about logged function
 struct LOGGED_FUNCTION{

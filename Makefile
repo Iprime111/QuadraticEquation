@@ -16,7 +16,7 @@ build_docs:
 
 $(addprefix $(buildDir)/, $(objects)): $(buildDir)/%.o: $(srcDir)/%.cpp
 	@echo [CC] $< -o $@
-	@$(CXX) $(CXXFLAGS) -c $< -o $@
+	@$(CXX) $(CXXFLAGS) -c $(realpath $<) -o $@
 
 SquareSolver: $(addprefix $(buildDir)/, $(objects))
 	@echo [CC] $^ -o $@

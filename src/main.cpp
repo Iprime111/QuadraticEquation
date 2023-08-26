@@ -22,7 +22,10 @@ int main (int argc, char *argv[]){
     double a = NAN, b = NAN, c = NAN;
 
     enum INPUT_STATUS input_res = request_input (&a, &b, &c);
-    solver_assert (input_res != exit_status, exit_status_found, 0);
+    solver_assert (input_res != eof_status, eof_found, 0);
+
+    if (input_res == exit_status)
+        return 0;
 
     struct SOLUTION_RESULT result = {no_result, {NAN, NAN}};
     solve_equation (a, b, c, &result);

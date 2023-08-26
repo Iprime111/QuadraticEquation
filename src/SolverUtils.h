@@ -1,7 +1,7 @@
 #ifndef SUTILS
 #define SUTILS
 
-const double EPS =  1.0e-6; /// EPS value for double comparison                                                                   \
+const double EPS =  1.0e-6; /// EPS value for double comparison
 
 /// @brief Current solution staus
 enum SOLUTION_STATUS {
@@ -14,9 +14,10 @@ enum SOLUTION_STATUS {
 
 /// @brief Status of current input operation
 enum INPUT_STATUS {
-    ok_status       = 0, ///< input operation worked as expected
-    wrong_format    = 1, ///< input data have wrong format
-    exit_status     = -1 ///< EOF or quit symbol has been found in input buffer
+    ok_status       = 0,  ///< Input operation worked as expected
+    wrong_format    = 1,  ///< Input data have wrong format
+    exit_status     = -1, ///< Quit symbol has been found in input buffer
+    eof_status      = -2  ///< EOF or quit symbol has been found in input buffer
 };
 
 /// @brief Doubles comparison result

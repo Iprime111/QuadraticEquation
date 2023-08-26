@@ -1,22 +1,30 @@
 #ifndef SOLVER_ASSERT
 #define SOLVER_ASSERT
 
-#include <cstdio>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <time.h>
+#include <sys/stat.h>
 
 #include "ColorConsole.h"
 #include "Logger.h"
 
-/*! @brief Custom assert implementation that provides information about file, function and line and do not stops the program*/
+const int MAX_LINE_LENGTH = 300;
+
+/*! @brief Custom assert implementation that provides information about file, function and line, do not stops the program and do not calls PopLog()*/
 #define solver_assert_without_logger(EXP, CODE, RET) \
     solver_assert_internal(EXP, CODE, RET, {})
 
+/*! @brief Custom assert implementation that provides information about file, function and line and do not stops the program*/
 #define solver_assert(EXP, CODE, RET) \
     solver_assert_internal(EXP, CODE, RET, PopLog())
 
+/*! @brief Custom assert implementation that provides information about file, function and line, do not stops the program and running the CALLBACK expression*/
 #define solver_assert_internal(EXP, CODE, RET, CALLBACK)                                                           \
             do{                                                                                 \
                 if (!(EXP)){                                                                    \
-                    assert_perror_solver (CODE, #EXP, __FILE__, __PRETTY_FUNCTION__, __LINE__); \
+                    assert_perror_solver (CODE, __FILE__, __PRETTY_FUNCTION__, __LINE__); \
                     CALLBACK;                                                                   \
                     return RET;                                                                 \
                 }                                                                               \
@@ -45,6 +53,18 @@ enum ERROR_CODE{
     @return Nothing
     Shows detailed error description, it's file and line and tested expression
 */
-void assert_perror_solver (enum ERROR_CODE code, char *expr, const char *file, const char *function, int line);
+void assert_perror_solver (enum ERROR_CODE code, const char *source_path, const char *function, unsigned int line);
+
+char *read_source (const char *source_filename, unsigned int line, unsigned int *line_shift);
+
+FILE *open_file (const char *filename);
+
+char *get_binary_file_path ();
+
+time_t get_last_modified_date (const char *filename);
+
+bool should_read_source (const char *source_filename);
+
+bool read_non_empty_string (char *str, FILE *fp, bool *read_next_line);
 
 #endif
