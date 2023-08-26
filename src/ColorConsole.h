@@ -1,6 +1,11 @@
 #ifndef COLOR_CONSOLE
 #define COLOR_CONSOLE
 
+#include <stdio.h>
+#include <stdarg.h>
+
+#include "Logger.h"
+
 /// @brief Enum for picking text color in console
 enum CONSOLE_COLOR{
     Console_black   = 0, ///< Black color

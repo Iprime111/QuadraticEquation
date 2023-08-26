@@ -1,8 +1,4 @@
-#include <cstdio>
-
-#include "SolverUtils.h"
-#include "ColorConsole.h"
-#include "Logger.h"
+#include "SolverAssert.h"
 
 void assert_perror_solver (enum ERROR_CODE code, char *expr, const char *file, const char* function, int line){
 

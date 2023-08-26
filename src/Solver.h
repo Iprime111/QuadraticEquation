@@ -1,7 +1,14 @@
 #ifndef SOLVER
 #define SOLVER
 
+#include <cassert>
+#include <math.h>
+#include <cstdio>
+
+#include "Solver.h"
+#include "Logger.h"
 #include "SolverUtils.h"
+#include "SolverAssert.h"
 
 /*!
     @brief Compares two doubles a and b

@@ -1,9 +1,4 @@
-#include <cassert>
-#include <cstdio>
-#include <cstdlib>
-
 #include "IOFunctions.h"
-#include "Logger.h"
 
 enum INPUT_STATUS request_input (double *a, double *b, double *c){
     PushLog(1);
@@ -33,9 +28,8 @@ enum INPUT_STATUS get_input (double *a, double *b, double *c){
     if(scanf("%lf %lf %lf", a, b, c) < 3){
         RETURN clear_buffer();
     }
-    RETURN ok_status;
 
-    PopLog();
+    RETURN ok_status;
 }
 
 enum INPUT_STATUS clear_buffer (){
@@ -94,6 +88,6 @@ void show_results (const struct SOLUTION_RESULT *result){
             break;
     };
 
-    PopLog();
+    RETURN ;
 }
 

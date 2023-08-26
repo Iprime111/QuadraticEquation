@@ -1,10 +1,4 @@
-#include <stdio.h>
-#include <math.h>
-
 #include "Tester.h"
-#include "Solver.h"
-#include "ColorConsole.h"
-#include "Logger.h"
 
 int Test (char *filename){
     PushLog(1);
@@ -129,7 +123,7 @@ int show_error (int test_number, const struct SOLUTION_RESULT *right_answer, con
 void show_success (int test_number){
     PushLog(3);
     printf_color (Console_green, Console_bold, "Test #%d passed \n", test_number);
-    PopLog();
+    RETURN ;
 }
 
 void print_roots (const struct SOLUTION_RESULT *answer){
@@ -155,13 +149,13 @@ void print_roots (const struct SOLUTION_RESULT *answer){
             break;
     }
 
-    PopLog();
+    RETURN ;
 }
 
 void show_test_results (int right_answers, int answers){
     PushLog(3);
     printf ("%d tests passed out of %d!!!\n", right_answers, answers);
-    PopLog();
+    RETURN ;
 }
 
 bool are_results_equal (struct SOLUTION_RESULT *res1, struct SOLUTION_RESULT *res2){

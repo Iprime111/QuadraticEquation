@@ -1,10 +1,4 @@
-#include <cassert>
-#include <math.h>
-#include <cstdio>
-
 #include "Solver.h"
-#include "Logger.h"
-
 
 int solve_equation (const double a, const double b, const double c, struct SOLUTION_RESULT *res){
     PushLog(2);

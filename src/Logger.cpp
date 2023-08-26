@@ -1,10 +1,4 @@
-#include <cstdio>
-#include <string.h>
-#include <cstdlib>
-
 #include "Logger.h"
-#include "SolverUtils.h"
-#include "ColorConsole.h"
 
 struct LOGGED_FUNCTION *Stack_trace_buffer = NULL;
 int _log_init = open_log();

@@ -1,8 +1,13 @@
 #ifndef TESTER
 #define TESTER
 
-#include <cstdio>
+#include <stdio.h>
 #include <math.h>
+
+#include "SolverAssert.h"
+#include "Solver.h"
+#include "ColorConsole.h"
+#include "Logger.h"
 #include "SolverUtils.h"
 
 /*!

@@ -16,7 +16,7 @@ int main (int argc, char *argv[]){
     if (argc > 1){
         Test (argv[1]);
 
-        RETURN(0);
+        RETURN 0;
     }
 
     double a = NAN, b = NAN, c = NAN;
@@ -31,5 +31,5 @@ int main (int argc, char *argv[]){
         show_results (&result);
     }
 
-    RETURN(0);
+    RETURN 0;
 }

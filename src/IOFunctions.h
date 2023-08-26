@@ -1,6 +1,12 @@
 #ifndef IOFUNC
 #define IOFUNC
 
+#include <cassert>
+#include <cstdio>
+#include <cstdlib>
+
+#include "Logger.h"
+#include "SolverAssert.h"
 #include "SolverUtils.h"
 
 /*!
@@ -36,5 +42,5 @@ void show_results (const struct SOLUTION_RESULT *result);
 
 #endif
 
- 
+
 

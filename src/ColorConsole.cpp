@@ -1,8 +1,5 @@
-#include <stdio.h>
-#include <stdarg.h>
-
 #include "ColorConsole.h"
-#include "Logger.h"
+
 
 void printf_color (enum CONSOLE_COLOR color, enum CONSOLE_BOLD bold, const char *format, ...){
     PushLog(4);

@@ -1,11 +1,18 @@
 #ifndef SOLVER_LOGGER
 #define SOLVER_LOGGER
 
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+#include "SolverAssert.h"
+#include "ColorConsole.h"
+
 /// @brief Size of a buffer which contains logged functions
 const int TRACE_BUFFER_SIZE = 20;
 
 /// @brief Max logging level
-const int LOG_LEVEL = 4;
+const int LOG_LEVEL = 1;
 
 /// @brief Struct for storing data about logged function
 struct LOGGED_FUNCTION{
@@ -81,10 +88,7 @@ extern struct LOGGED_FUNCTION *Stack_trace_buffer;
 
 #define PushLog(LEVEL) ;
 #define PopLog() ;
-#define RETURN(RET)         \
-            do{             \
-                return RET; \
-            }while(0)
+#define RETURN return
 
 #endif
 

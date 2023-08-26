@@ -1,7 +1,10 @@
-#ifndef SUTILS
-#define SUTILS
+#ifndef SOLVER_ASSERT
+#define SOLVER_ASSERT
 
-const double EPS =  1.0e-6;/// EPS value for double comparison
+#include <cstdio>
+
+#include "ColorConsole.h"
+#include "Logger.h"
 
 /*! @brief Custom assert implementation that provides information about file, function and line and do not stops the program*/
 #define solver_assert_without_logger(EXP, CODE, RET) \
@@ -17,23 +20,7 @@ const double EPS =  1.0e-6;/// EPS value for double comparison
                     CALLBACK;                                                                   \
                     return RET;                                                                 \
                 }                                                                               \
-            }while(0)                                                                           \
-
-/// @brief Current solution staus
-enum SOLUTION_STATUS {
-    no_roots    = 0, ///< Equation has no roots
-    one_root    = 1, ///< Equation has one root
-    two_roots   = 2, ///< Equation has two roots
-    inf_roots   = 3, ///< Equation has infinitely many roots
-    no_result   = 4  ///< Equation hasn't been solved yet
-};
-
-/// @brief Status of current input operation
-enum INPUT_STATUS {
-    ok_status       = 0, ///< input operation worked as expected
-    wrong_format    = 1, ///< input data have wrong format
-    exit_status     = -1 ///< EOF or quit symbol has been found in input buffer
-};
+            }while(0)
 
 /// @brief Code of detected error
 enum ERROR_CODE{
@@ -51,19 +38,6 @@ enum ERROR_CODE{
     length_too_big      = 11  ///< String length is too big
 };
 
-/// @brief Doubles comparison result
-enum COMPARE_RESULT{
-    GREATER     = 1,    ///< First argument is greater than second
-    LESS        = -1,   ///< First argument is less than second
-    EQUAL       = 0     ///< Arguments are equal
-};
-
-/// @brief Struct that contains roots of equation and it's solution status
-struct SOLUTION_RESULT{
-    enum SOLUTION_STATUS status; ///< Status of current solution
-    double answers[2]; ///< Roots of the equation
-};
-
 /*!
     @brief Shows error in console
     @param[in] code Error code
@@ -74,5 +48,3 @@ struct SOLUTION_RESULT{
 void assert_perror_solver (enum ERROR_CODE code, char *expr, const char *file, const char *function, int line);
 
 #endif
-
-
